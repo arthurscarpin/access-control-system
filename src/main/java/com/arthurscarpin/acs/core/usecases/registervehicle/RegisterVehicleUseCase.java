@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.usecases;
+package com.arthurscarpin.acs.core.usecases.registervehicle;
 
 import com.arthurscarpin.acs.core.entity.Vehicle;
 

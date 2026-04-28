@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.usecases;
+package com.arthurscarpin.acs.core.usecases.updatevehiclestatus;
 
 import com.arthurscarpin.acs.core.entity.Vehicle;
 
