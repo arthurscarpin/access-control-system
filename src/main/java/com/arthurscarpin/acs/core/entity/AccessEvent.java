@@ -1,5 +1,7 @@
 package com.arthurscarpin.acs.core.entity;
 
+import com.arthurscarpin.acs.core.enums.AccessResult;
+
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -8,6 +10,6 @@ public record AccessEvent(
         String plate,
         OffsetDateTime timestamp,
         String direction,
-        String result
+        AccessResult result
 ) {
 }
