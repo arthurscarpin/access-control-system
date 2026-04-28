@@ -4,5 +4,5 @@ import com.arthurscarpin.acs.core.entity.Vehicle;
 
 public interface RegisterVehicleUseCase {
 
-    Vehicle execute(Vehicle vehicle);
+    Vehicle execute(RegisterVehicleRequest vehicle);
 }

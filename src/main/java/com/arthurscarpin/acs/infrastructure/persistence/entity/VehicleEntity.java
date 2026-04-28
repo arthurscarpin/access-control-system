@@ -1,20 +1,19 @@
-package com.arthurscarpin.acs.infraestructure.persistence.entity;
+package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
-import com.arthurscarpin.acs.core.enums.AccessResult;
+import com.arthurscarpin.acs.core.enums.VehicleStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "access_event")
+@Table(name = "vehicle")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class AccessEvent {
+public class VehicleEntity {
 
     private static final long serialVersionUUID = 1L;
 
@@ -25,13 +24,13 @@ public class AccessEvent {
     @Column(nullable = false, unique = true)
     private String plate;
 
-    @Column(nullable = false)
-    private OffsetDateTime timestamp;
-
-    @Column(nullable = false)
-    private String direction;
+    private String model;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AccessResult result;
+    private VehicleStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private OwnerEntity owner;
 }

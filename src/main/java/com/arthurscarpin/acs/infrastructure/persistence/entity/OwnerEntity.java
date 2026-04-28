@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infraestructure.persistence.entity;
+package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class Owner {
+public class OwnerEntity {
 
     private static final long serialVersionUUID = 1L;
 

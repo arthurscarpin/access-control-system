@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infraestructure.persistence.entity;
+package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class AccessRule {
+public class AccessRuleEntity {
 
     private static final long serialVersionUUID = 1L;
 
@@ -22,7 +22,7 @@ public class AccessRule {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
+    private VehicleEntity vehicle;
 
     @Column(nullable = false)
     private boolean allowed;
