@@ -1,12 +1,13 @@
-package com.arthurscarpin.acs.core.usecases.registervehicle;
+package com.arthurscarpin.acs.core.vehicle.usecase;
 
-import com.arthurscarpin.acs.core.entity.Vehicle;
-import com.arthurscarpin.acs.core.enums.VehicleStatus;
-import com.arthurscarpin.acs.core.exception.DuplicateLicensePlateException;
-import com.arthurscarpin.acs.core.exception.ResourceNotFoundException;
+import com.arthurscarpin.acs.core.owner.domain.Owner;
+import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
+import com.arthurscarpin.acs.core.vehicle.domain.VehicleStatus;
+import com.arthurscarpin.acs.core.vehicle.exception.PlateDuplicateException;
+import com.arthurscarpin.acs.core.owner.exception.OwnerNotFoundException;
 import com.arthurscarpin.acs.core.owner.gateway.OwnerGateway;
-import com.arthurscarpin.acs.core.gateway.VehicleGateway;
-import com.arthurscarpin.acs.core.usecases.registervehicle.normalization.PlateNormalization;
+import com.arthurscarpin.acs.core.vehicle.gateway.VehicleGateway;
+import com.arthurscarpin.acs.core.vehicle.domain.Plate;
 
 public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
 
@@ -20,24 +21,24 @@ public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
     }
 
     @Override
-    public Vehicle execute(RegisterVehicleRequest request) {
-        PlateNormalization plateNormalizationNormalized = new PlateNormalization(request.plate());
+    public Vehicle execute(Vehicle vehicle) {
+        Plate plate = new Plate(vehicle.plate());
 
-        if (vehicleGateway.existsByPlate(plateNormalizationNormalized.plate())) {
-            throw new DuplicateLicensePlateException("Vehicle with plate " + plateNormalizationNormalized.plate() + " already exists.");
+        if (vehicleGateway.findByPlate(plate.plate()).isPresent()) {
+            throw new PlateDuplicateException("Plate already exists");
         }
 
-        if (!ownerGateway.existsById(request.ownerId())) {
-            throw new ResourceNotFoundException("Owner with id " + request.ownerId() + " does not exist.");
-        }
+        Owner owner = ownerGateway.findById(vehicle.ownerId())
+                .orElseThrow(() -> new OwnerNotFoundException("Owner not found"));
 
-        Vehicle vehicle = new Vehicle(
-                null,
-                plateNormalizationNormalized.plate(),
-                request.model(),
+        Vehicle vehicleToSave = new Vehicle(
+                vehicle.id(),
+                plate.plate(),
+                vehicle.model(),
                 VehicleStatus.ACTIVE,
-                request.ownerId()
+                owner.id()
         );
-        return vehicleGateway.save(vehicle);
+
+        return vehicleGateway.save(vehicleToSave);
     }
 }

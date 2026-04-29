@@ -1,8 +1,8 @@
 package com.arthurscarpin.acs.core.vehicle.exception;
 
-public class LicensePlateInvalidException extends RuntimeException {
+public class PlateInvalidException extends RuntimeException {
 
-    public LicensePlateInvalidException(String message) {
+    public PlateInvalidException(String message) {
         super(message);
     }
 }

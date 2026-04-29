@@ -1,8 +1,8 @@
 package com.arthurscarpin.acs.core.vehicle.exception;
 
-public class DuplicateLicensePlateException extends RuntimeException {
+public class PlateDuplicateException extends RuntimeException {
 
-    public DuplicateLicensePlateException(String message) {
+    public PlateDuplicateException(String message) {
         super(message);
     }
 }

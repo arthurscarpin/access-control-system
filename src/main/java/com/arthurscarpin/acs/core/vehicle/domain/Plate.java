@@ -1,6 +1,6 @@
-package com.arthurscarpin.acs.core.vehicle.model;
+package com.arthurscarpin.acs.core.vehicle.domain;
 
-import com.arthurscarpin.acs.core.vehicle.exception.LicensePlateInvalidException;
+import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
 
 public record Plate(
         String plate
@@ -16,7 +16,7 @@ public record Plate(
 
     private static void validate(String plateNormalized) {
         if (plateNormalized.length() != 7) {
-            throw new LicensePlateInvalidException("License plate must have 7 characters");
+            throw new PlateInvalidException("License plate must have 7 characters");
         }
     }
 }

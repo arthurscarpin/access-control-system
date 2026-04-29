@@ -1,8 +1,8 @@
-package com.arthurscarpin.acs.core.usecases.registervehicle;
+package com.arthurscarpin.acs.core.vehicle.usecase;
 
-import com.arthurscarpin.acs.core.entity.Vehicle;
+import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
 
 public interface RegisterVehicleUseCase {
 
-    Vehicle execute(RegisterVehicleRequest request);
+    Vehicle execute(Vehicle vehicle);
 }
