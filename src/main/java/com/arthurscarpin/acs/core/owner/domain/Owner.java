@@ -1,6 +1,4 @@
-package com.arthurscarpin.acs.core.owner.entity;
-
-import com.arthurscarpin.acs.core.owner.enums.DocumentType;
+package com.arthurscarpin.acs.core.owner.domain;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
-package com.arthurscarpin.acs.core.vehicle.exception;
+package com.arthurscarpin.acs.core.owner.exception;
 
-public class VehicleNotFoundException extends RuntimeException {
+public class OwnerNotFoundException extends RuntimeException {
 
-    public VehicleNotFoundException(String message) {
+    public OwnerNotFoundException(String message) {
         super(message);
     }
 }
