@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.exception;
+package com.arthurscarpin.acs.core.vehicle.exception;
 
 public class LicensePlateInvalidException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package com.arthurscarpin.acs.core.entity;
+package com.arthurscarpin.acs.core.vehicle.entity;
 
-import com.arthurscarpin.acs.core.enums.VehicleStatus;
+import com.arthurscarpin.acs.core.vehicle.enums.VehicleStatus;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.dto.response;
 
-import com.arthurscarpin.acs.core.enums.VehicleStatus;
+import com.arthurscarpin.acs.core.vehicle.domain.VehicleStatus;
 
 import java.util.UUID;
 

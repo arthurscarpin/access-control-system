@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.enums;
+package com.arthurscarpin.acs.core.vehicle.enums;
 
 public enum VehicleStatus {
     ACTIVE,

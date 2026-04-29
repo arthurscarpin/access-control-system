@@ -10,10 +10,7 @@ import java.util.UUID;
 public record VehicleRequest(
         @NotBlank
         @Size(min = 5, max = 10)
-        @Pattern(
-                regexp = "^[a-zA-Z0-9- ]+$",
-                message = "Plate must contain only letters and numbers"
-        )
+        @Pattern(regexp = "^[a-zA-Z0-9- ]+$", message = "Plate must contain only letters and numbers")
         String plate,
 
         @NotBlank

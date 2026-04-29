@@ -4,9 +4,9 @@ import com.arthurscarpin.acs.core.entity.Vehicle;
 import com.arthurscarpin.acs.core.enums.VehicleStatus;
 import com.arthurscarpin.acs.core.exception.DuplicateLicensePlateException;
 import com.arthurscarpin.acs.core.exception.ResourceNotFoundException;
-import com.arthurscarpin.acs.core.gateway.OwnerGateway;
+import com.arthurscarpin.acs.core.owner.gateway.OwnerGateway;
 import com.arthurscarpin.acs.core.gateway.VehicleGateway;
-import com.arthurscarpin.acs.core.model.LicensePlate;
+import com.arthurscarpin.acs.core.usecases.registervehicle.normalization.PlateNormalization;
 
 public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
 
@@ -21,10 +21,10 @@ public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
 
     @Override
     public Vehicle execute(RegisterVehicleRequest request) {
-        LicensePlate plateNormalized = new LicensePlate(request.plate());
+        PlateNormalization plateNormalizationNormalized = new PlateNormalization(request.plate());
 
-        if (vehicleGateway.existsByPlate(plateNormalized.plate())) {
-            throw new DuplicateLicensePlateException("Vehicle with plate " + plateNormalized.plate() + " already exists.");
+        if (vehicleGateway.existsByPlate(plateNormalizationNormalized.plate())) {
+            throw new DuplicateLicensePlateException("Vehicle with plate " + plateNormalizationNormalized.plate() + " already exists.");
         }
 
         if (!ownerGateway.existsById(request.ownerId())) {
@@ -33,7 +33,7 @@ public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
 
         Vehicle vehicle = new Vehicle(
                 null,
-                plateNormalized.plate(),
+                plateNormalizationNormalized.plate(),
                 request.model(),
                 VehicleStatus.ACTIVE,
                 request.ownerId()

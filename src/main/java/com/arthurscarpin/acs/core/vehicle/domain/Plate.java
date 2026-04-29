@@ -1,11 +1,11 @@
-package com.arthurscarpin.acs.core.model;
+package com.arthurscarpin.acs.core.vehicle.model;
 
-import com.arthurscarpin.acs.core.exception.LicensePlateInvalidException;
+import com.arthurscarpin.acs.core.vehicle.exception.LicensePlateInvalidException;
 
-public record LicensePlate (
+public record Plate(
         String plate
 ) {
-    public LicensePlate{
+    public Plate {
         plate = normalized(plate);
         validate(plate);
     }
