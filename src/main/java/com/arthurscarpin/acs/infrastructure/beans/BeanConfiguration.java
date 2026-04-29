@@ -7,6 +7,8 @@ import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
 import com.arthurscarpin.acs.core.vehicle.gateway.VehicleGateway;
 import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;
 import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCaseImpl;
+import com.arthurscarpin.acs.core.vehicle.usecase.UpdateVehicleStatusUseCase;
+import com.arthurscarpin.acs.core.vehicle.usecase.UpdateVehicleStatusUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,5 +23,10 @@ public class BeanConfiguration {
     @Bean
     public RegisterOwnerUseCase registerOwnerUseCase(OwnerGateway ownerGateway) {
         return new RegisterOwnerImpl(ownerGateway);
+    }
+
+    @Bean
+    public UpdateVehicleStatusUseCase updateVehicleStatusUseCase(VehicleGateway vehicleGateway) {
+        return new UpdateVehicleStatusUseCaseImpl(vehicleGateway);
     }
 }
