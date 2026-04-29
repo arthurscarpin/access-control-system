@@ -1,11 +1,11 @@
 package com.arthurscarpin.acs.core.accessevent.usecase;
 
 import com.arthurscarpin.acs.core.accessevent.domain.AccessEvent;
-import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
+import com.arthurscarpin.acs.core.pagination.PageInput;
+import com.arthurscarpin.acs.core.pagination.PageOutput;
 
-import java.util.List;
 
 public interface GetAccessHistoryUseCase {
 
-    List<AccessEvent> execute(Vehicle vehicle);
+    PageOutput<AccessEvent> execute(PageInput pageInput);
 }
