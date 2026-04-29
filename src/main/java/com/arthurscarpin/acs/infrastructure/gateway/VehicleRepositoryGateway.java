@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +24,12 @@ public class VehicleRepositoryGateway implements VehicleGateway {
     private final OwnerRepository ownerRepository;
 
     private final VehicleMapper vehicleMapper;
+
+    @Override
+    public Optional<Vehicle> findById(UUID id) {
+        return vehicleRepository.findById(id)
+                .map(vehicleMapper::fromEntityToDomain);
+    }
 
     @Override
     public Optional<Vehicle> findByPlate(String plate) {
