@@ -1,7 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.persistence.repository;
 
 import com.arthurscarpin.acs.core.owner.domain.DocumentType;
-import com.arthurscarpin.acs.core.owner.domain.Owner;
 import com.arthurscarpin.acs.infrastructure.persistence.entity.OwnerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
