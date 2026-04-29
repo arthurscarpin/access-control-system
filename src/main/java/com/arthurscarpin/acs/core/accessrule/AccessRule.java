@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.entity;
+package com.arthurscarpin.acs.core.accessrule;
 
 import java.util.UUID;
 
