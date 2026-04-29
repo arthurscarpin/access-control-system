@@ -2,5 +2,9 @@ package com.arthurscarpin.acs.core.vehicle.domain;
 
 public enum VehicleStatus {
     ACTIVE,
-    BLOCKED
+    BLOCKED;
+
+    public VehicleStatus toggle() {
+        return this == ACTIVE ? BLOCKED : ACTIVE;
+    }
 }
