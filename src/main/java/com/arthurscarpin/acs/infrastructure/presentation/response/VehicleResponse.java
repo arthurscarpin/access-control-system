@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.dto.response;
+package com.arthurscarpin.acs.infrastructure.presentation.response;
 
 import com.arthurscarpin.acs.core.vehicle.domain.VehicleStatus;
 

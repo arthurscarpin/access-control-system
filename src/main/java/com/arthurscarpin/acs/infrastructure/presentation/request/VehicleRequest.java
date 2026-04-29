@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.dto.request;
+package com.arthurscarpin.acs.infrastructure.presentation.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +17,6 @@ public record VehicleRequest(
         String model,
 
         @NotNull
-        UUID owner_id
+        UUID ownerId
 ) {
 }

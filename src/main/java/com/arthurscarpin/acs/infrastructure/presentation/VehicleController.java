@@ -1,11 +1,10 @@
 package com.arthurscarpin.acs.infrastructure.presentation;
 
-import com.arthurscarpin.acs.core.entity.Vehicle;
-import com.arthurscarpin.acs.core.usecases.registervehicle.RegisterVehicleRequest;
-import com.arthurscarpin.acs.core.usecases.registervehicle.RegisterVehicleUseCase;
+import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
+import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;
 import com.arthurscarpin.acs.infrastructure.mapper.VehicleMapper;
-import com.arthurscarpin.acs.infrastructure.dto.request.VehicleRequest;
-import com.arthurscarpin.acs.infrastructure.dto.response.VehicleResponse;
+import com.arthurscarpin.acs.infrastructure.presentation.request.VehicleRequest;
+import com.arthurscarpin.acs.infrastructure.presentation.response.VehicleResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,8 @@ public class VehicleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public VehicleResponse save(@Valid @RequestBody VehicleRequest request) {
-        RegisterVehicleRequest registerVehicleRequest = mapper.toRequest(request);
-        Vehicle vehicle = registerVehicleUseCase.execute(registerVehicleRequest);
-        return mapper.toResponse(vehicle);
+        Vehicle domain = mapper.fromRequestToDomain(request);
+        Vehicle response = registerVehicleUseCase.execute(domain);
+        return mapper.fromDomainToResponse(response);
     }
 }
