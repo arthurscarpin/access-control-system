@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.core.accessevent.enums;
+package com.arthurscarpin.acs.core.accessevent.domain;
 
 public enum AccessResult {
     AUTHORIZED,

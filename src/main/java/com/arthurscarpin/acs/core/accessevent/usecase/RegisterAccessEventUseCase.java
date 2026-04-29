@@ -1,7 +1,7 @@
-package com.arthurscarpin.acs.core.usecases.registeraccessevent;
+package com.arthurscarpin.acs.core.accessevent.usecase;
 
-import com.arthurscarpin.acs.core.entity.AccessEvent;
-import com.arthurscarpin.acs.core.entity.Vehicle;
+import com.arthurscarpin.acs.core.accessevent.domain.AccessEvent;
+import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
 
 public interface RegisterAccessEventUseCase {
 

@@ -1,6 +1,4 @@
-package com.arthurscarpin.acs.core.accessevent.entity;
-
-import com.arthurscarpin.acs.core.accessevent.enums.AccessResult;
+package com.arthurscarpin.acs.core.accessevent.domain;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
