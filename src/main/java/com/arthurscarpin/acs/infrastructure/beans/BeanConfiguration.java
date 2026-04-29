@@ -1,9 +1,12 @@
 package com.arthurscarpin.acs.infrastructure.beans;
 
-import com.arthurscarpin.acs.core.gateway.OwnerGateway;
-import com.arthurscarpin.acs.core.gateway.VehicleGateway;
-import com.arthurscarpin.acs.core.usecases.registervehicle.RegisterVehicleUseCase;
-import com.arthurscarpin.acs.core.usecases.registervehicle.RegisterVehicleUseCaseImpl;
+import com.arthurscarpin.acs.core.owner.domain.DocumentFactory;
+import com.arthurscarpin.acs.core.owner.gateway.OwnerGateway;
+import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerImpl;
+import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
+import com.arthurscarpin.acs.core.vehicle.gateway.VehicleGateway;
+import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;
+import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,5 +16,10 @@ public class BeanConfiguration {
     @Bean
     public RegisterVehicleUseCase registerVehicleUseCase(VehicleGateway vehicleGateway, OwnerGateway ownerGateway) {
         return new RegisterVehicleUseCaseImpl(vehicleGateway, ownerGateway);
+    }
+
+    @Bean
+    public RegisterOwnerUseCase registerOwnerUseCase(OwnerGateway ownerGateway) {
+        return new RegisterOwnerImpl(ownerGateway);
     }
 }
