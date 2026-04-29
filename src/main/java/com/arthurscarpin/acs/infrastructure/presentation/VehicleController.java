@@ -31,7 +31,7 @@ public class VehicleController {
         return mapper.fromDomainToResponse(registerVehicleUseCase.execute(domain));
     }
 
-    @GetMapping("/{id}")
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VehicleResponse findById(@PathVariable UUID id) {
         Vehicle domain = updateVehicleStatusUseCase.execute(id);
