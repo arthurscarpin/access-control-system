@@ -1,5 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
+import com.arthurscarpin.acs.core.owner.domain.DocumentType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,10 @@ public class OwnerEntity {
 
     @Column(nullable = false, unique = true)
     private String document;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private DocumentType documentType;
 
     @Column(nullable = false, unique = true)
     private String email;

@@ -1,6 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
-import com.arthurscarpin.acs.core.enums.AccessResult;
+import com.arthurscarpin.acs.core.accessevent.domain.AccessResult;
 import jakarta.persistence.*;
 import lombok.*;
 

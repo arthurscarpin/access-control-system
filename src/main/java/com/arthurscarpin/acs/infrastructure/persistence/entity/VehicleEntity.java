@@ -1,6 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.persistence.entity;
 
-import com.arthurscarpin.acs.core.enums.VehicleStatus;
+import com.arthurscarpin.acs.core.vehicle.domain.VehicleStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
