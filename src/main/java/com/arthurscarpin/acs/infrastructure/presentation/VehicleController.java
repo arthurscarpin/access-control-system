@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,8 +28,7 @@ public class VehicleController {
     @ResponseStatus(HttpStatus.CREATED)
     public VehicleResponse save(@Valid @RequestBody VehicleRequest request) {
         Vehicle domain = mapper.fromRequestToDomain(request);
-        Vehicle response = registerVehicleUseCase.execute(domain);
-        return mapper.fromDomainToResponse(response);
+        return mapper.fromDomainToResponse(registerVehicleUseCase.execute(domain));
     }
 
     @GetMapping("/{id}")

@@ -1,6 +1,8 @@
 package com.arthurscarpin.acs.infrastructure.beans;
 
-import com.arthurscarpin.acs.core.owner.domain.DocumentFactory;
+import com.arthurscarpin.acs.core.accessevent.gateway.AccessEventGateway;
+import com.arthurscarpin.acs.core.accessevent.usecase.ValidateAccessUseCase;
+import com.arthurscarpin.acs.core.accessevent.usecase.ValidateAccessUseCaseImpl;
 import com.arthurscarpin.acs.core.owner.gateway.OwnerGateway;
 import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerImpl;
 import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
@@ -28,5 +30,10 @@ public class BeanConfiguration {
     @Bean
     public UpdateVehicleStatusUseCase updateVehicleStatusUseCase(VehicleGateway vehicleGateway) {
         return new UpdateVehicleStatusUseCaseImpl(vehicleGateway);
+    }
+
+    @Bean
+    public ValidateAccessUseCase validateAccessUseCase(VehicleGateway vehicleGateway, AccessEventGateway accessEventGateway) {
+        return new ValidateAccessUseCaseImpl(vehicleGateway, accessEventGateway);
     }
 }
