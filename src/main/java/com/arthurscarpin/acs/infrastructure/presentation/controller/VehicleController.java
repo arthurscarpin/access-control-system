@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.presentation;
+package com.arthurscarpin.acs.infrastructure.presentation.controller;
 
 import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
 import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;

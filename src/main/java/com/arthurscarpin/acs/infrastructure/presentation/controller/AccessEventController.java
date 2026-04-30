@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.presentation;
+package com.arthurscarpin.acs.infrastructure.presentation.controller;
 
 import com.arthurscarpin.acs.core.accessevent.domain.AccessEvent;
 import com.arthurscarpin.acs.core.accessevent.usecase.GetAccessHistoryUseCase;

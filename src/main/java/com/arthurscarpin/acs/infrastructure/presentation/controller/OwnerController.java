@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.presentation;
+package com.arthurscarpin.acs.infrastructure.presentation.controller;
 
 import com.arthurscarpin.acs.core.owner.domain.Owner;
 import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
