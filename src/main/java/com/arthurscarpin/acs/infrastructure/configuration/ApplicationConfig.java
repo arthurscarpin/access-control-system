@@ -1,4 +1,4 @@
-package com.arthurscarpin.acs.infrastructure.beans;
+package com.arthurscarpin.acs.infrastructure.configuration;
 
 import com.arthurscarpin.acs.core.accessevent.gateway.AccessEventGateway;
 import com.arthurscarpin.acs.core.accessevent.usecase.GetAccessHistoryUseCase;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeanConfiguration {
+public class ApplicationConfig {
 
     @Bean
     public RegisterVehicleUseCase registerVehicleUseCase(VehicleGateway vehicleGateway, OwnerGateway ownerGateway) {
