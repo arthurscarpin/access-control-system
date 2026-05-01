@@ -1,6 +1,7 @@
 package com.arthurscarpin.acs.infrastructure.presentation.advice;
 
 import com.arthurscarpin.acs.core.owner.exception.*;
+import com.arthurscarpin.acs.core.user.exception.EmailUserAlreadyExistsException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateDuplicateException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
 import com.arthurscarpin.acs.core.vehicle.exception.VehicleNotFoundException;
@@ -107,6 +108,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PlateDuplicateException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handlePlateDuplicateException(PlateDuplicateException ex) {
+        return ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .message(ex.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(EmailUserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleEmailUserAlreadyExistsException(EmailUserAlreadyExistsException ex) {
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
