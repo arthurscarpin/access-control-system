@@ -9,4 +9,6 @@ public interface LoginGateway {
     boolean isPasswordCorrect(String password, String savedPassword);
 
     String generateToken(User savedUser, Long expiresIn, List<String> scopes);
+
+    String encryptPassword(String password);
 }

@@ -37,4 +37,9 @@ public class LoginUserAuthenticationGateway implements LoginGateway {
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(jwt)).getTokenValue();
     }
+
+    @Override
+    public String encryptPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
