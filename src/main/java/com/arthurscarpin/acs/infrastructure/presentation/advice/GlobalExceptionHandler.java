@@ -1,6 +1,7 @@
 package com.arthurscarpin.acs.infrastructure.presentation.advice;
 
 import com.arthurscarpin.acs.core.owner.exception.*;
+import com.arthurscarpin.acs.core.user.exception.BadCredentialsException;
 import com.arthurscarpin.acs.core.user.exception.EmailUserAlreadyExistsException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateDuplicateException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
@@ -61,6 +62,16 @@ public class GlobalExceptionHandler {
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleBadCredentialsException(BadCredentialsException ex) {
+        return ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(HttpStatus.UNAUTHORIZED.value())
                 .message(ex.getMessage())
                 .build();
     }

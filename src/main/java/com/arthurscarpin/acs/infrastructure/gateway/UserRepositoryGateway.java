@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -42,5 +43,11 @@ public class UserRepositoryGateway implements UserGateway {
         savedUser.setPassword(passwordEncoder.encode(user.password()));
         savedUser.setActive(true);
         return mapper.fromEntityToDomain(userRepository.save(savedUser));
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmailWithScopes(email)
+                .map(mapper::fromEntityToDomain);
     }
 }
