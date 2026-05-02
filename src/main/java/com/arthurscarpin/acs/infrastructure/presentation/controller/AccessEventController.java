@@ -5,6 +5,8 @@ import com.arthurscarpin.acs.core.accessevent.usecase.GetAccessHistoryUseCase;
 import com.arthurscarpin.acs.core.accessevent.usecase.ValidateAccessUseCase;
 import com.arthurscarpin.acs.core.pagination.PageInput;
 import com.arthurscarpin.acs.core.pagination.PageOutput;
+import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanReadAccessEvent;
+import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteAccessEvent;
 import com.arthurscarpin.acs.infrastructure.mapper.AccessEventMapper;
 import com.arthurscarpin.acs.infrastructure.presentation.request.AccessEventRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.AccessEventResponse;
@@ -30,6 +32,7 @@ public class AccessEventController {
 
     private final AccessEventMapper mapper;
 
+    @CanWriteAccessEvent
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AccessEventResponse save(@Valid @RequestBody AccessEventRequest request) {
@@ -37,6 +40,7 @@ public class AccessEventController {
         return mapper.fromDomainToResponse(validateAccessUseCase.execute(domain));
     }
 
+    @CanReadAccessEvent
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<AccessEventResponse> findAll(

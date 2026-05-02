@@ -2,6 +2,7 @@ package com.arthurscarpin.acs.infrastructure.presentation.controller;
 
 import com.arthurscarpin.acs.core.owner.domain.Owner;
 import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
+import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteOwner;
 import com.arthurscarpin.acs.infrastructure.presentation.request.OwnerRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.OwnerResponse;
 import com.arthurscarpin.acs.infrastructure.mapper.OwnerMapper;
@@ -19,6 +20,7 @@ public class OwnerController {
 
     private final OwnerMapper mapper;
 
+    @CanWriteOwner
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OwnerResponse save(@Valid @RequestBody OwnerRequest request) {

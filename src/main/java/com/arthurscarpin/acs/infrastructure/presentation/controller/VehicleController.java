@@ -3,6 +3,7 @@ package com.arthurscarpin.acs.infrastructure.presentation.controller;
 import com.arthurscarpin.acs.core.vehicle.domain.Vehicle;
 import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;
 import com.arthurscarpin.acs.core.vehicle.usecase.UpdateVehicleStatusUseCase;
+import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteVehicle;
 import com.arthurscarpin.acs.infrastructure.mapper.VehicleMapper;
 import com.arthurscarpin.acs.infrastructure.presentation.request.VehicleRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.VehicleResponse;
@@ -24,6 +25,7 @@ public class VehicleController {
 
     private final VehicleMapper mapper;
 
+    @CanWriteVehicle
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public VehicleResponse save(@Valid @RequestBody VehicleRequest request) {
@@ -31,6 +33,7 @@ public class VehicleController {
         return mapper.fromDomainToResponse(registerVehicleUseCase.execute(domain));
     }
 
+    @CanWriteVehicle
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VehicleResponse findById(@PathVariable UUID id) {
