@@ -8,6 +8,7 @@ import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
 import com.arthurscarpin.acs.core.vehicle.exception.VehicleNotFoundException;
 import com.arthurscarpin.acs.infrastructure.presentation.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -72,6 +73,16 @@ public class GlobalExceptionHandler {
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
+                .message(ex.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
+        return ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(HttpStatus.FORBIDDEN.value())
                 .message(ex.getMessage())
                 .build();
     }

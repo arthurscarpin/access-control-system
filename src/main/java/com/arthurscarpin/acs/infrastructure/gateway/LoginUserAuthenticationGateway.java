@@ -1,5 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.gateway;
 
+import com.arthurscarpin.acs.core.scope.domain.Scope;
 import com.arthurscarpin.acs.core.user.domain.User;
 import com.arthurscarpin.acs.core.user.gateway.LoginGateway;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,18 @@ public class LoginUserAuthenticationGateway implements LoginGateway {
     }
 
     @Override
-    public String generateToken(User savedUser, Long expiresIn, List<String> scopes) {
+    public String generateToken(User savedUser, Long expiresIn, List<Scope> scopes) {
+        List<String> scopesNames = scopes.stream()
+                .map(Scope::name)
+                .toList();
+
         JwtClaimsSet jwt = JwtClaimsSet.builder()
-                .issuer("elifoot-api")
+                .issuer("access-control-system")
                 .subject(savedUser.name())
                 .expiresAt(Instant.now().plusSeconds(expiresIn))
                 .issuedAt(Instant.now())
                 .claim("email", savedUser.email())
-                .claim("scope", scopes)
+                .claim("scope", String.join(" ", scopesNames))
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(jwt)).getTokenValue();
     }

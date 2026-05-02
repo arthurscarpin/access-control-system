@@ -14,4 +14,6 @@ public interface ScopeRepository extends JpaRepository<ScopeEntity, UUID> {
 
     @Query("SELECT s.id FROM ScopeEntity s WHERE s.id IN :ids")
     List<UUID> findAllIdsByIds(@Param("ids") List<UUID> ids);
+
+    List<ScopeEntity> findAllByIdIn(List<UUID> ids);
 }

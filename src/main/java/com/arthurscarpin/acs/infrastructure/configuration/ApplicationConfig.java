@@ -57,7 +57,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public LoginUserUseCase loginUserUseCase(UserGateway userGateway, LoginGateway loginGateway) {
-        return new LoginUserUseCaseImpl(userGateway, loginGateway);
+    public LoginUserUseCase loginUserUseCase(UserGateway userGateway, LoginGateway loginGateway, ScopeGateway scopeGateway) {
+        return new LoginUserUseCaseImpl(userGateway, loginGateway, scopeGateway);
     }
 }
