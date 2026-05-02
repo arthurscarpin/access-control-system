@@ -8,9 +8,11 @@ import com.arthurscarpin.acs.infrastructure.presentation.response.OwnerResponse;
 import com.arthurscarpin.acs.infrastructure.mapper.OwnerMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/owners")
 @RequiredArgsConstructor
@@ -24,7 +26,12 @@ public class OwnerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OwnerResponse save(@Valid @RequestBody OwnerRequest request) {
+        log.info("Starting owner registration for email: {}", request.email());
         Owner domain = mapper.fromRequestToDomain(request);
-        return mapper.fromDomainToResponse(registerOwnerUseCase.execute(domain));
+        log.debug("Mapped request to domain: {}", domain);
+        Owner response = registerOwnerUseCase.execute(domain);
+        log.debug("Owner after registration: {}", response);
+        log.info("Owner registration completed for email: {}", response.email());
+        return mapper.fromDomainToResponse(response);
     }
 }

@@ -9,11 +9,13 @@ import com.arthurscarpin.acs.infrastructure.presentation.request.VehicleRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.VehicleResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/vehicles")
 @RequiredArgsConstructor
@@ -29,15 +31,23 @@ public class VehicleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public VehicleResponse save(@Valid @RequestBody VehicleRequest request) {
+        log.info("Starting vehicle registration for plate: {}", request.plate());
         Vehicle domain = mapper.fromRequestToDomain(request);
-        return mapper.fromDomainToResponse(registerVehicleUseCase.execute(domain));
+        log.debug("Mapped request to domain: {}", domain);
+        Vehicle response = registerVehicleUseCase.execute(domain);
+        log.debug("Vehicle after registration: {}", response);
+        log.info("Vehicle registration completed for plate: {}", response.plate());
+        return mapper.fromDomainToResponse(response);
     }
 
     @CanWriteVehicle
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VehicleResponse findById(@PathVariable UUID id) {
-        Vehicle domain = updateVehicleStatusUseCase.execute(id);
-        return mapper.fromDomainToResponse(domain);
+        log.info("Updating vehicle status for id: {}", id);
+        Vehicle response = updateVehicleStatusUseCase.execute(id);
+        log.debug("Vehicle after status update: {}", response);
+        log.info("Vehicle status updated for id: {}", id);
+        return mapper.fromDomainToResponse(response);
     }
 }
