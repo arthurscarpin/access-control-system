@@ -7,11 +7,11 @@ public record AccessEvent(
         UUID id,
         String plate,
         OffsetDateTime timestamp,
-        String direction,
+        Direction direction,
         AccessResult result
 ) {
 
-    public static AccessEvent create(String plate, OffsetDateTime timestamp, String direction, AccessResult result) {
+    public static AccessEvent create(String plate, OffsetDateTime timestamp, Direction direction, AccessResult result) {
         return new AccessEvent(null, plate, timestamp, direction, result);
     }
 }

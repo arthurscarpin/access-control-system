@@ -1,5 +1,6 @@
 package com.arthurscarpin.acs.infrastructure.presentation.request;
 
+import com.arthurscarpin.acs.core.accessevent.domain.Direction;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -11,17 +12,17 @@ import java.time.OffsetDateTime;
 public record AccessEventRequest(
 
         @NotBlank
-        @Schema(description = "Vehicle plate", example = "ABC-1234")
+        @Schema(description = "Vehicle plate", example = "BRA1S23")
         String plate,
 
-        @NotBlank
+        @NotNull
         @Schema(description = "Access direction", example = "IN")
-        String direction,
+        Direction direction,
 
         @NotNull
         @PastOrPresent
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
-        @Schema(description = "Event timestamp (must be in the past or present)", example = "2025-01-01T00:00:00-01:00")
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssXXX")
+        @Schema(description = "Event timestamp", example = "2026-01-01 00:00:00-03:00")
         OffsetDateTime timestamp
 ) {
 }
