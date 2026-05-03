@@ -7,6 +7,7 @@ import com.arthurscarpin.acs.core.vehicle.exception.PlateDuplicateException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
 import com.arthurscarpin.acs.core.vehicle.exception.VehicleNotFoundException;
 import com.arthurscarpin.acs.infrastructure.presentation.response.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
@@ -19,6 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -29,6 +31,7 @@ public class GlobalExceptionHandler {
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
+        log.error("Validation failed for fields: {}", fieldErrors, ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -40,6 +43,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DocumentInvalidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleDocumentInvalidException(DocumentInvalidException ex) {
+        log.error("Document invalid exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -50,6 +54,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NameInvalidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleNameInvalidException(NameInvalidException ex) {
+        log.error("Name invalid exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -60,6 +65,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PlateInvalidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlePlateInvalidException(PlateInvalidException ex) {
+        log.error("Plate invalid exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -70,6 +76,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorResponse handleBadCredentialsException(BadCredentialsException ex) {
+        log.error("Bad credentials exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
@@ -80,6 +87,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthorizationDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponse handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
+        log.error("Authorization denied exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.FORBIDDEN.value())
@@ -90,6 +98,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(OwnerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleOwnerNotFoundException(OwnerNotFoundException ex) {
+        log.error("Owner not found exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
@@ -100,6 +109,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(VehicleNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleVehicleNotFoundException(VehicleNotFoundException ex) {
+        log.error("Vehicle not found exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
@@ -110,6 +120,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DocumentDuplicateException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleDocumentDuplicateException(DocumentDuplicateException ex) {
+        log.error("Document duplicate exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
@@ -120,6 +131,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmailDuplicateException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleEmailDuplicateException(EmailDuplicateException ex) {
+        log.error("Email duplicate exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
@@ -130,6 +142,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PlateDuplicateException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handlePlateDuplicateException(PlateDuplicateException ex) {
+        log.error("Plate duplicate exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
@@ -140,6 +153,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmailUserAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleEmailUserAlreadyExistsException(EmailUserAlreadyExistsException ex) {
+        log.error("Email user already exists exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
@@ -150,6 +164,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleRuntimeException(RuntimeException ex) {
+        log.error("Runtime exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
