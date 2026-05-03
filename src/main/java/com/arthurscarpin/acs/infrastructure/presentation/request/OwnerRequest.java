@@ -11,12 +11,12 @@ public record OwnerRequest(
 
         @NotBlank
         @Size(min = 3, max = 100)
-        @Schema(description = "Owner full name", example = "Ronaldo Nazario")
+        @Schema(description = "Owner full name", example = "Maria Oliveira")
         String name,
 
         @NotBlank
         @Size(min = 9, max = 20)
-        @Schema(description = "Document number (CPF/CNPJ depending on type)", example = "12345678901")
+        @Schema(description = "Document number", example = "111.444.777-35")
         String document,
 
         @NotNull
@@ -25,7 +25,7 @@ public record OwnerRequest(
 
         @NotBlank
         @Email
-        @Schema(description = "Owner email address", example = "ronaldo.nazario@email.com")
+        @Schema(description = "Owner email address", example = "contact@example.com")
         String email
 ) {
 }

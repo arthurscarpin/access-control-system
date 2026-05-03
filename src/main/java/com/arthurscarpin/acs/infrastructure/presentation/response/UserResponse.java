@@ -7,19 +7,19 @@ import java.util.UUID;
 
 public record UserResponse(
 
-        @Schema(description = "Unique identifier of the user", example = "550e8400-e29b-41d4-a716-446655440020")
+        @Schema(description = "Unique identifier of the user", example = "00000000-0000-0000-0000-000000000001")
         UUID id,
 
-        @Schema(description = "User full name", example = "Lionel Messi")
+        @Schema(description = "User full name", example = "Ana Santos")
         String name,
 
-        @Schema(description = "User email address", example = "lionel.messi@email.com")
+        @Schema(description = "User email address", example = "contact@example.com")
         String email,
 
         @Schema(description = "List of user scopes", example = """
             [
-            "550e8400-e29b-41d4-a716-446655440020",
-            "550e8400-e29b-41d4-a716-446655440020"
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000002"
             ]
             """)
         List<String> scopes

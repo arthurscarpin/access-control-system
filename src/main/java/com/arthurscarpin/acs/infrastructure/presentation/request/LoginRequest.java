@@ -8,11 +8,11 @@ public record LoginRequest(
 
         @NotBlank
         @Email
-        @Schema(description = "User email address", example = "neymar.junior@email.com")
+        @Schema(description = "User email address", example = "contact@example.com")
         String email,
 
         @NotBlank
-        @Schema(description = "User password", example = "world_cup_2026")
+        @Schema(description = "User password", example = "Password@1234")
         String password
 ) {
 }

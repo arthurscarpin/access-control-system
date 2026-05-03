@@ -7,19 +7,19 @@ import java.util.UUID;
 
 public record VehicleResponse(
 
-        @Schema(description = "Unique identifier of the vehicle", example = "550e8400-e29b-41d4-a716-446655440030")
+        @Schema(description = "Unique identifier of the vehicle", example = "00000000-0000-0000-0000-000000000001")
         UUID id,
 
-        @Schema(description = "Vehicle plate", example = "ABC-1234")
+        @Schema(description = "Vehicle plate", example = "BRA1S23")
         String plate,
 
-        @Schema(description = "Vehicle model", example = "BMW 320i")
+        @Schema(description = "Vehicle model", example = "Audi A8")
         String model,
 
         @Schema(description = "Current vehicle status", example = "ACTIVE")
         VehicleStatus status,
 
-        @Schema(description = "Identifier of the vehicle owner", example = "550e8400-e29b-41d4-a716-446655440010")
+        @Schema(description = "Identifier of the vehicle owner", example = "00000000-0000-0000-0000-000000000001")
         UUID ownerId
 ) {
 }
