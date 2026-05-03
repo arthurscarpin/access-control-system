@@ -3,9 +3,10 @@ package com.arthurscarpin.acs.infrastructure.presentation.controller;
 import com.arthurscarpin.acs.core.owner.domain.Owner;
 import com.arthurscarpin.acs.core.owner.usecase.RegisterOwnerUseCase;
 import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteOwner;
+import com.arthurscarpin.acs.infrastructure.mapper.OwnerMapper;
+import com.arthurscarpin.acs.infrastructure.presentation.documentation.OwnerControllerDoc;
 import com.arthurscarpin.acs.infrastructure.presentation.request.OwnerRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.OwnerResponse;
-import com.arthurscarpin.acs.infrastructure.mapper.OwnerMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/owners")
 @RequiredArgsConstructor
-public class OwnerController {
+public class OwnerController implements OwnerControllerDoc {
 
     private final RegisterOwnerUseCase registerOwnerUseCase;
 

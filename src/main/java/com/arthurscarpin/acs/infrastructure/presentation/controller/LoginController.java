@@ -3,6 +3,7 @@ package com.arthurscarpin.acs.infrastructure.presentation.controller;
 import com.arthurscarpin.acs.core.user.domain.User;
 import com.arthurscarpin.acs.core.user.usecase.LoginUserUseCase;
 import com.arthurscarpin.acs.infrastructure.mapper.LoginMapper;
+import com.arthurscarpin.acs.infrastructure.presentation.documentation.LoginControllerDoc;
 import com.arthurscarpin.acs.infrastructure.presentation.request.LoginRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.LoginResponse;
 import jakarta.validation.Valid;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
-public class LoginController {
+public class LoginController implements LoginControllerDoc {
 
     private final LoginUserUseCase loginUserUseCase;
 

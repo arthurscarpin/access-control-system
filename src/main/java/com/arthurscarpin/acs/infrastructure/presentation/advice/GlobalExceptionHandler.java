@@ -1,24 +1,25 @@
 package com.arthurscarpin.acs.infrastructure.presentation.advice;
 
 import com.arthurscarpin.acs.core.owner.exception.*;
+import com.arthurscarpin.acs.core.scope.exception.ScopeNotFoundException;
 import com.arthurscarpin.acs.core.user.exception.BadCredentialsException;
 import com.arthurscarpin.acs.core.user.exception.EmailUserAlreadyExistsException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateDuplicateException;
 import com.arthurscarpin.acs.core.vehicle.exception.PlateInvalidException;
 import com.arthurscarpin.acs.core.vehicle.exception.VehicleNotFoundException;
+import com.arthurscarpin.acs.infrastructure.presentation.response.ErrorField;
 import com.arthurscarpin.acs.infrastructure.presentation.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.OffsetDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
@@ -27,16 +28,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        Map<String, String> fieldErrors = new HashMap<>();
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        }
-        log.error("Validation failed for fields: {}", fieldErrors, ex);
+        List<ErrorField> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> new ErrorField(error.getField(), error.getDefaultMessage()))
+                .toList();
+        log.error("Validation failed for fields: {}", errors, ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message("Validation failed for one or more fields")
-                .errors(fieldErrors)
+                .errors(errors)
                 .build();
     }
 
@@ -66,6 +68,17 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlePlateInvalidException(PlateInvalidException ex) {
         log.error("Plate invalid exception: {}", ex.getMessage(), ex);
+        return ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        log.error("Invalid request body: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -110,6 +123,17 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleVehicleNotFoundException(VehicleNotFoundException ex) {
         log.error("Vehicle not found exception: {}", ex.getMessage(), ex);
+        return ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .message(ex.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(ScopeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse ScopeNotFoundException(ScopeNotFoundException ex) {
+        log.error("Scope not found exception: {}", ex.getMessage(), ex);
         return ErrorResponse.builder()
                 .timestamp(OffsetDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())

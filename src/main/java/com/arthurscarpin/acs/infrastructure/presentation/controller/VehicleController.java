@@ -5,6 +5,7 @@ import com.arthurscarpin.acs.core.vehicle.usecase.RegisterVehicleUseCase;
 import com.arthurscarpin.acs.core.vehicle.usecase.UpdateVehicleStatusUseCase;
 import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteVehicle;
 import com.arthurscarpin.acs.infrastructure.mapper.VehicleMapper;
+import com.arthurscarpin.acs.infrastructure.presentation.documentation.VehicleControllerDoc;
 import com.arthurscarpin.acs.infrastructure.presentation.request.VehicleRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.VehicleResponse;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/vehicles")
 @RequiredArgsConstructor
-public class VehicleController {
+public class VehicleController implements VehicleControllerDoc {
 
     private final RegisterVehicleUseCase registerVehicleUseCase;
 

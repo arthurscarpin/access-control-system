@@ -8,6 +8,7 @@ import com.arthurscarpin.acs.core.pagination.PageOutput;
 import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanReadAccessEvent;
 import com.arthurscarpin.acs.infrastructure.configuration.annotations.CanWriteAccessEvent;
 import com.arthurscarpin.acs.infrastructure.mapper.AccessEventMapper;
+import com.arthurscarpin.acs.infrastructure.presentation.documentation.AccessEventControllerDoc;
 import com.arthurscarpin.acs.infrastructure.presentation.request.AccessEventRequest;
 import com.arthurscarpin.acs.infrastructure.presentation.response.AccessEventResponse;
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/access-events")
 @RequiredArgsConstructor
-public class AccessEventController {
+public class AccessEventController implements AccessEventControllerDoc {
 
     private final ValidateAccessUseCase validateAccessUseCase;
 
